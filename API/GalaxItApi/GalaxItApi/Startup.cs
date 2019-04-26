@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using GalaxItApi.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GalaxItApi
 {
@@ -26,6 +28,8 @@ namespace GalaxItApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<GalaxitContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("GalaxitContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
