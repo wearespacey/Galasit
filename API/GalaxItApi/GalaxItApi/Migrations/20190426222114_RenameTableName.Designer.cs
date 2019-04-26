@@ -4,14 +4,16 @@ using GalaxItApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GalaxItApi.Migrations
 {
     [DbContext(typeof(GalaxitContext))]
-    partial class GalaxitContextModelSnapshot : ModelSnapshot
+    [Migration("20190426222114_RenameTableName")]
+    partial class RenameTableName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,15 +75,18 @@ namespace GalaxItApi.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email").IsRequired();
 
-                    b.Property<string>("Firstname");
 
-                    b.Property<byte[]>("Password");
+                    b.Property<string>("Firstname").IsRequired();
+
+
+                    b.Property<byte[]>("Password").IsRequired();
+
 
                     b.Property<string>("SeatId");
 
-                    b.Property<string>("Surname");
+                    b.Property<string>("Surname").IsRequired();
 
                     b.HasKey("Id");
 
