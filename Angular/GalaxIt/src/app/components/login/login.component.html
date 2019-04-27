@@ -1,28 +1,26 @@
-<form [formGroup]="loginForm">
+<form class="logincontainer" [formGroup]="loginForm">
   <table>
-    <tr class="right">
+    <tr align="right">
       <td>
         <label>Login :</label>
       </td>
-      <td class="left">
-        <input formControlName="login" type="text" name="login" placeholder="Login">    
+      <td align="left">
+        <input formControlName="login" type="text" name="login" placeholder="Email">    
       </td>
     </tr>
 
     <tr>
-      <td class="right">
+      <td align="right">
         <label>Password : </label>
       </td>
-      <td class="left">
-        <input formControlName="password" type="password" name="password" placeholder="Password" autocomplete="false">
+      <td align="left">
+        <input formControlName="password" type="password" name="password" placeholder="*******" autocomplete="false">
       </td>
     </tr>
 
     <tr>
-      <td class="right">
+      <td align="center" colspan="2">
         <button id="loginSubmitButton" [disabled]="!loginForm.valid" type="submit" (click)="onLoginSubmit()">LOGIN</button>
-      </td>
-      <td class="left">
         <button id="registerSubmitButton" type="submit" (click)="onRegisterSubmit()">REGISTER</button>    
       </td>
     </tr>

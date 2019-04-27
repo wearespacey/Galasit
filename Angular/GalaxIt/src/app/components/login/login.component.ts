@@ -16,15 +16,12 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() { 
-    console.log("init");
-    //this.router.navigateByUrl("/home");
   }
 
   onLoginSubmit() {
-    console.log("triggered!");
   }
 
   onRegisterSubmit() {
-    console.log("triggered!");
+    this.router.navigateByUrl("/register");
   }
 }
