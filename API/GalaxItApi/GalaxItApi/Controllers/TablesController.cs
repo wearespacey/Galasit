@@ -6,11 +6,15 @@ using Microsoft.EntityFrameworkCore;
 using GalaxItApi.Data;
 
 using GalaxItApi.Models;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace GalaxItApi.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [
+        Route("api/[controller]"),
+        ApiController,
+        Produces("application/json")
+    ]
     public class TablesController : ControllerBase
     {
         private readonly GalaxitContext _context;
@@ -21,29 +25,51 @@ namespace GalaxItApi.Controllers
         }
 
         // GET: api/Tables
-        [HttpGet]
+        [
+            HttpGet,
+            SwaggerOperation(
+                Summary = "Requests all the tables",
+                Description = "Returns all the available tables"
+            ),
+            SwaggerResponse(200, "Returns all the available tables", typeof(IEnumerable<Table>))
+        ]
         public async Task<ActionResult<IEnumerable<Table>>> GetTables()
         {
             return await _context.Tables.ToListAsync();
         }
 
         // GET: api/Tables/5
-        [HttpGet("{id}")]
+        [
+            HttpGet("{id}"),
+            SwaggerOperation(
+                Summary = "Requests a table based on its id",
+                Description = "Returns the table data"
+            ),
+            SwaggerResponse(200, "Returns the table data", typeof(Table)),
+            SwaggerResponse(404, "If the table does not exist")
+        ]
         public async Task<ActionResult<Table>> GetTable(string id)
         {
-            var table = await _context.Tables.FindAsync(id);
-
+            var table = await _context.Tables.FirstOrDefaultAsync(t => t.Id == id);
             if (table == null)
             {
                 return NotFound();
             }
-
-            return table;
+            return Ok(table);
         }
 
         // PUT: api/Tables/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTable(string id, Table table)
+        [
+            HttpPut("{id}"),
+            SwaggerOperation(
+                Summary = "Edits a table based on its id",
+                Description = "Returns the edited table data"
+            ),
+            SwaggerResponse(204, "Returns no result when it succeeded"),
+            SwaggerResponse(400, "If the body does not validate the requirements"),
+            SwaggerResponse(404, "If the table does not exist")
+        ]
+        public async Task<IActionResult> PutTable(string id, [FromBody] Table table)
         {
             if (id != table.Id)
             {
@@ -72,17 +98,38 @@ namespace GalaxItApi.Controllers
         }
 
         // POST: api/Tables
-        [HttpPost]
-        public async Task<ActionResult<Table>> PostTable(Table table)
+        [
+            HttpPost,
+            SwaggerOperation(
+                Summary = "Creates a table",
+                Description = "Returns the created table data"
+            ),
+            SwaggerResponse(201, "Returns the newly created table", typeof(Table)),
+            SwaggerResponse(400, "If the body does not validate the requirements")
+        ]
+        public async Task<ActionResult<Table>> PostTable([FromBody] Table table)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
             _context.Tables.Add(table);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTable", new { id = table.Id }, table);
+            return Created($"api/tables/{table.Id}", table);
         }
 
         // DELETE: api/Tables/5
-        [HttpDelete("{id}")]
+        [
+            HttpDelete("{id}"),
+            SwaggerOperation(
+                Summary = "Deletes a table based on its id",
+                Description = "Returns the deleted table data"
+            ),
+            SwaggerResponse(202, "Returns the deleted table data", typeof(Table)),
+            SwaggerResponse(404, "If the table does not exist")
+        ]
         public async Task<ActionResult<Table>> DeleteTable(string id)
         {
             var table = await _context.Tables.FindAsync(id);
@@ -94,12 +141,9 @@ namespace GalaxItApi.Controllers
             _context.Tables.Remove(table);
             await _context.SaveChangesAsync();
 
-            return table;
+            return Accepted(table);
         }
 
-        private bool TableExists(string id)
-        {
-            return _context.Tables.Any(e => e.Id == id);
-        }
+        private bool TableExists(string id) => _context.Tables.Any(e => e.Id == id);
     }
 }
