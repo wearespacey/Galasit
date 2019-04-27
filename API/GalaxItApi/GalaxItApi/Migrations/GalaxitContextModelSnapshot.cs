@@ -39,6 +39,8 @@ namespace GalaxItApi.Migrations
 
                     b.Property<DateTime>("End");
 
+                    b.Property<int>("Number");
+
                     b.Property<bool>("Occupied");
 
                     b.Property<DateTime>("Start");

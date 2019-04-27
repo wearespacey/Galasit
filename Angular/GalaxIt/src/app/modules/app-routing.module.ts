@@ -20,12 +20,8 @@ const routes: Routes = [
       { path: 'unbook', component: UnbookComponent }
     ]
   },
-  {
-    path: '', component: SelectionComponent, 
-    children: [
-      { path: 'seat/:id', component: SeatInfoComponent }
-    ]
-  },
+  { path: 'seat', component: SelectionComponent }, 
+  { path: 'seat/:id', component: SeatInfoComponent },
   { path: '**', component: PageNotFoundComponent }
 ]
 
