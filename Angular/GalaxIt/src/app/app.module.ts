@@ -2,8 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule,MatCardModule,MatProgressBarModule,MatDatepickerModule,MatFormFieldModule,MatNativeDateModule,MatInputModule, MatCheckboxModule,MatMenuModule} from '@angular/material';
+import { MatButtonModule,MatCardModule,MatProgressBarModule,MatDatepickerModule,MatFormFieldModule,MatNativeDateModule,MatInputModule, MatCheckboxModule,MatMenuModule} from '@angular/material';
 import { AppRoutingModule } from './modules/app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
+
 import { AppComponent } from './app.component';
 import { UnbookComponent } from './components/unbook/unbook.component';
 import { BackgroundComponent } from './components/background/background.component';
@@ -13,7 +17,11 @@ import { BubbleComponent } from './components/bubble/bubble.component';
 import { SelectionComponent } from './components/selection/selection.component';
 import { SeatInfoComponent } from './components/seat-info/seat-info.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { FormsModule } from '@angular/forms';
+
+import { APIS } from './services/api';
+import { BASE_PATH } from './variables';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,9 +50,11 @@ import { FormsModule } from '@angular/forms';
     MatMenuModule,
     MatCardModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [APIS, { provide: BASE_PATH, useValue: environment.API_BASE_PATH }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
