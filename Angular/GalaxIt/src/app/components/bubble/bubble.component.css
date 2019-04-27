@@ -21,22 +21,22 @@ button{
 }
 
 .calm-bubble{
-    height: 200px;
-    width: 600px;
+    height: 25%;
+    width: 45%;
     top: 70%;
     left: 30%;
 }
 
 .cowork-bubble{
-    height: 150px;
-    width: 450px;
+    height: 20%;
+    width: 30%;
     top: 47%;
-    left: 1%;
+    left: 0%;
 }
 
 .music-bubble{
-    height: 150px;
-    width: 450px;
-    margin-left: 25%;
+    height: 20%;
+    width: 30%;
+    left: 65%;
     margin-top: 27%;
 }
