@@ -97,26 +97,16 @@ namespace GalaxItApi.Controllers
         }
 
         [HttpPut("NewNumberUser/{id}")]
-        public async Task<ActionResult<Bubble>> SendNewNumberOfUser(string id,int number)
+        public async Task<ActionResult<Bubble>> SendNewNumberOfUser(string id,bool[] place)
         {
             var bubble = await _context.Bubbles.Include(b => b.Tables).ThenInclude(t => t.Seats).FirstOrDefaultAsync(b => b.Id == id);
             if (bubble == null) return NotFound("Bubble not found");
             foreach (var t in bubble.Tables)
             {
-                foreach (var s in t.Seats)
+                var j = 0;
+                foreach (var seat in t.Seats)
                 {
-                    if (number > 0)
-                    {
-                        if (s.Occupied == false)
-                        {
-                            s.Occupied = true;
-                        }
-                        number--;
-                    }
-                    else
-                    {
-                        s.Occupied = false;
-                    }
+                    seat.Occupied = place[j];
                 }
             }
             _context.Entry(bubble).State = EntityState.Modified;
