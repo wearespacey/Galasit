@@ -1,3 +1,29 @@
-<p>
-  seat-info works!
-</p>
+<mat-card class="info-card">
+  <mat-card-header>
+    <mat-card-title>Seat information</mat-card-title>
+    <mat-card-subtitle>Bubble calm</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://start.lesechos.fr/images/2018/07/25/12489_1532529182_shutterstock-314834924_970x545p.jpg" alt="Photo of seat">
+  <mat-card-content>
+    <p>
+        Information about place
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <form>
+        <mat-form-field>
+            <input matInput [matDatepicker]="Start" placeholder="Start">
+            <mat-datepicker-toggle matSuffix [for]="Start"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <br/>
+        <mat-form-field>
+            <input matInput [matDatepicker]="End" placeholder="End">
+            <mat-datepicker-toggle matSuffix [for]="End"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <br/>
+        <button mat-raised-button color="primary">Book</button>
+    </form>
+  </mat-card-actions>
+</mat-card>
