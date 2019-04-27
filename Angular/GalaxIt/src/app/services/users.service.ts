@@ -16,8 +16,9 @@ import { HttpClient, HttpHeaders, HttpParams,
          HttpResponse, HttpEvent }                           from '@angular/common/http';
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import { Observable }                                        from 'rxjs';
+import { Observable }                                        from 'rxjs/Observable';
 
+import { ProblemDetails } from '../model/problemDetails';
 import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -57,8 +58,8 @@ export class UsersService {
 
 
     /**
-     * 
-     * 
+     * Deletes a user based on its id
+     * Returns the deleted user data
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -76,9 +77,7 @@ export class UsersService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -100,8 +99,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Requests a user based on its id
+     * Returns the user data
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -119,9 +118,7 @@ export class UsersService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -143,8 +140,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Requests all the users
+     * Returns all the available users
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -157,9 +154,7 @@ export class UsersService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -181,8 +176,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Creates a user
+     * Returns the created user data
      * @param user 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -197,9 +192,7 @@ export class UsersService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -230,8 +223,8 @@ export class UsersService {
     }
 
     /**
-     * 
-     * 
+     * Edits a user based on its id
+     * Returns the edited user data
      * @param id 
      * @param user 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -251,6 +244,7 @@ export class UsersService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
