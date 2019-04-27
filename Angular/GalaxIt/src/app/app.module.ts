@@ -1,32 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule,MatMenuModule } from '@angular/material';
-import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './modules/app-routing.module';
 
 import { AppComponent } from './app.component';
-import { BackgroundComponent } from './background/background.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { BubbleComponent } from './bubble/bubble.component';
-import { UnbookComponent } from './unbook/unbook.component';
-import { SelectionComponent } from './selection/selection.component';
-import { InfoComponent } from './info/info.component';
-import { SeatInfoComponent } from './seat-info/seat-info.component';
-
-
+import { UnbookComponent } from './components/unbook/unbook.component';
+import { BackgroundComponent } from './components/background/background.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { BubbleComponent } from './components/bubble/bubble.component';
+import { SelectionComponent } from './components/selection/selection.component';
+import { SeatInfoComponent } from './components/seat-info/seat-info.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BackgroundComponent,
     LoginComponent,
+    PageNotFoundComponent,
     RegisterComponent,
     BubbleComponent,
     UnbookComponent,
     SelectionComponent,
-    InfoComponent,
     SeatInfoComponent
   ],
   imports: [
@@ -35,7 +33,8 @@ import { SeatInfoComponent } from './seat-info/seat-info.component';
     MatMenuModule,
     MatButtonModule, 
     MatCheckboxModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
