@@ -10,8 +10,14 @@ button{
     width:100%;
 }
 
+.bubble {
+    background: url("../../../assets/images/bubulle.png") no-repeat no-repeat;
+    height: 100%;
+    width: 100%;
+}
+
 .bubble:hover {
-    
+    filter: brightness(150%);
 }
 
 .calm-bubble{

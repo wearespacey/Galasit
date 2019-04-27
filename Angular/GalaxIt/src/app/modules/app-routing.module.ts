@@ -16,6 +16,7 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'bubble', component: BubbleComponent },
+      { path: 'bubble/:id', component: SelectionComponent },
       { path: 'unbook', component: UnbookComponent }
     ]
   },
