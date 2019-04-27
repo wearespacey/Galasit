@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using GalaxItApi.Data;
 using GalaxItApi.Models;
@@ -28,7 +28,7 @@ namespace GalaxItApi.Controllers
                 return NotFound();
             }
 
-            if (entity.Password.Equals(login.Password)) return Ok();
+            if (entity.Password.Equals(login.Password)) return Ok(entity.Id);
             return Unauthorized();
 
         }
@@ -40,7 +40,7 @@ namespace GalaxItApi.Controllers
             {
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok(user.Id);
             }
             return BadRequest("Email is already associated with an account");
         }
