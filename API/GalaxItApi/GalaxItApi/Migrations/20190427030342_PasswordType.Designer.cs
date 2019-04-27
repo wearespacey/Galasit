@@ -4,14 +4,16 @@ using GalaxItApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GalaxItApi.Migrations
 {
     [DbContext(typeof(GalaxitContext))]
-    partial class GalaxitContextModelSnapshot : ModelSnapshot
+    [Migration("20190427030342_PasswordType")]
+    partial class PasswordType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

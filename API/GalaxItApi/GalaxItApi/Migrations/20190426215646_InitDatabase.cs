@@ -43,8 +43,8 @@ namespace GalaxItApi.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Occupied = table.Column<bool>(nullable: false),
-                    Start = table.Column<DateTime>(nullable: false),
-                    End = table.Column<DateTime>(nullable: false),
+                    Start = table.Column<DateTime>(nullable: true),
+                    End = table.Column<DateTime>(nullable: true),
                     TableId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
