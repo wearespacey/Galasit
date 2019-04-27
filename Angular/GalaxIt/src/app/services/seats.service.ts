@@ -16,8 +16,9 @@ import { HttpClient, HttpHeaders, HttpParams,
          HttpResponse, HttpEvent }                           from '@angular/common/http';
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import { Observable }                                        from 'rxjs';
+import { Observable }                                        from 'rxjs/Observable';
 
+import { ProblemDetails } from '../model/problemDetails';
 import { Seat } from '../model/seat';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -57,8 +58,8 @@ export class SeatsService {
 
 
     /**
-     * 
-     * 
+     * Deletes a seat based on its id
+     * Returns the deleted seat data
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -76,9 +77,7 @@ export class SeatsService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -100,8 +99,8 @@ export class SeatsService {
     }
 
     /**
-     * 
-     * 
+     * Requests a seat based on its id
+     * Returns the seat data
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -119,9 +118,7 @@ export class SeatsService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -143,8 +140,8 @@ export class SeatsService {
     }
 
     /**
-     * 
-     * 
+     * Requests all the seats
+     * Returns all the seats
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -157,9 +154,7 @@ export class SeatsService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -181,8 +176,8 @@ export class SeatsService {
     }
 
     /**
-     * 
-     * 
+     * Creates a seat
+     * Returns the created seat data
      * @param seat 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -197,9 +192,7 @@ export class SeatsService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -230,8 +223,8 @@ export class SeatsService {
     }
 
     /**
-     * 
-     * 
+     * Edits a seat based on its id
+     * Returns the edited seat data
      * @param id 
      * @param seat 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -251,6 +244,7 @@ export class SeatsService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {

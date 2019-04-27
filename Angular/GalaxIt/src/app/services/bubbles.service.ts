@@ -16,9 +16,10 @@ import { HttpClient, HttpHeaders, HttpParams,
          HttpResponse, HttpEvent }                           from '@angular/common/http';
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import { Observable }                                        from 'rxjs';
+import { Observable }                                        from 'rxjs/Observable';
 
 import { Bubble } from '../model/bubble';
+import { ProblemDetails } from '../model/problemDetails';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -57,8 +58,8 @@ export class BubblesService {
 
 
     /**
-     * 
-     * 
+     * Deletes a bubble based on its id
+     * Returns the deleted bubble data
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -76,9 +77,7 @@ export class BubblesService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -100,8 +99,8 @@ export class BubblesService {
     }
 
     /**
-     * 
-     * 
+     * Requests a bubble based on its id
+     * Returns the bubble data
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -119,9 +118,7 @@ export class BubblesService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -143,8 +140,8 @@ export class BubblesService {
     }
 
     /**
-     * 
-     * 
+     * Requests all the bubbles
+     * Returns all the available bubbles
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -157,9 +154,7 @@ export class BubblesService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -181,8 +176,8 @@ export class BubblesService {
     }
 
     /**
-     * 
-     * 
+     * Creates a bubble
+     * Returns the created bubble data
      * @param bubble 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -197,9 +192,7 @@ export class BubblesService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -230,8 +223,8 @@ export class BubblesService {
     }
 
     /**
-     * 
-     * 
+     * Edits a bubble based on its id
+     * Returns the edited bubble data
      * @param id 
      * @param bubble 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -251,6 +244,7 @@ export class BubblesService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -281,35 +275,28 @@ export class BubblesService {
     }
 
     /**
-     * 
-     * 
+     * Edits a bubble based on its id
+     * Returns the edited bubble data
      * @param id 
      * @param number 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public sendNewNumberOfUser(id: string, number?: number, observe?: 'body', reportProgress?: boolean): Observable<Bubble>;
-    public sendNewNumberOfUser(id: string, number?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Bubble>>;
-    public sendNewNumberOfUser(id: string, number?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Bubble>>;
-    public sendNewNumberOfUser(id: string, number?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public sendNewNumberOfUsers(id: string, number?: number, observe?: 'body', reportProgress?: boolean): Observable<Bubble>;
+    public sendNewNumberOfUsers(id: string, number?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Bubble>>;
+    public sendNewNumberOfUsers(id: string, number?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Bubble>>;
+    public sendNewNumberOfUsers(id: string, number?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling sendNewNumberOfUser.');
+            throw new Error('Required parameter id was null or undefined when calling sendNewNumberOfUsers.');
         }
 
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (number !== undefined && number !== null) {
-            queryParameters = queryParameters.set('number', <any>number);
-        }
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -318,12 +305,19 @@ export class BubblesService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
+            'application/json',
+            'text/json',
+            'application/_*+json'
         ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
 
         return this.httpClient.put<Bubble>(`${this.basePath}/api/Bubbles/NewNumberUser/${encodeURIComponent(String(id))}`,
-            null,
+            number,
             {
-                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
