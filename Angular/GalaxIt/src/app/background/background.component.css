@@ -10,3 +10,9 @@
     z-index: -9999;
     object-fit: cover;
 }
+
+.logo{
+    height: 300px;
+    width: 600px;
+    margin-top: -5%;
+}

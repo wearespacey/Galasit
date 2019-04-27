@@ -15,17 +15,7 @@ import { SelectionComponent } from './selection/selection.component';
 import { InfoComponent } from './info/info.component';
 import { SeatInfoComponent } from './seat-info/seat-info.component';
 
-const routes: Routes = [
-  {path:'', component: BackgroundComponent, children: [
-    {path:'login', component: LoginComponent},
-    {path:'register', component:RegisterComponent},
-    {path:'bubble', component: BubbleComponent},
-    {path: 'unbook', component: UnbookComponent}
-  ]},
-  {path:'', component: SelectionComponent, children:[
-    {path:'seat', component:SeatInfoComponent}
-  ]}
-]
+
 
 @NgModule({
   declarations: [
@@ -45,8 +35,7 @@ const routes: Routes = [
     MatMenuModule,
     MatButtonModule, 
     MatCheckboxModule,
-    AppRoutingModule, 
-    RouterModule.forRoot(routes),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
