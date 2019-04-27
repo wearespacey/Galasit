@@ -1,0 +1,30 @@
+<form [formGroup]="loginForm">
+  <table>
+    <tr class="right">
+      <td>
+        <label>Login :</label>
+      </td>
+      <td class="left">
+        <input formControlName="login" type="text" name="login" placeholder="Login">    
+      </td>
+    </tr>
+
+    <tr>
+      <td class="right">
+        <label>Password : </label>
+      </td>
+      <td class="left">
+        <input formControlName="password" type="password" name="password" placeholder="Password" autocomplete="false">
+      </td>
+    </tr>
+
+    <tr>
+      <td class="right">
+        <button id="loginSubmitButton" [disabled]="!loginForm.valid" type="submit" (click)="onLoginSubmit()">LOGIN</button>
+      </td>
+      <td class="left">
+        <button id="registerSubmitButton" type="submit" (click)="onRegisterSubmit()">REGISTER</button>    
+      </td>
+    </tr>
+  </table>
+</form>
