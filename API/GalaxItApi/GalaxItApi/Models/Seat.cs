@@ -21,6 +21,9 @@ namespace GalaxItApi.Models
         [Required]
         public Table Table { get; set; }
 
+        [Required]//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Number { get; set; }
+
         public IEnumerable<User> Users { get; set; } = new List<User>();
     }
 }

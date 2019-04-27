@@ -5,5 +5,22 @@
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    background-color: lightgrey;
 }
+
+.info-card mat-card-header{ 
+    text-align : center; 
+} 
+.info-card { 
+    text-align : center; 
+    max-width: 400px; 
+}
+
+.ptb{
+    height: 80px;
+    width: 600px;
+    position: absolute;
+    margin-top: 40%;
+    margin-left: 10%;
+}
+
+
