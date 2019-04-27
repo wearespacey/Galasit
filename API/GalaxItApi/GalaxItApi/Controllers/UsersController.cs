@@ -31,18 +31,16 @@ namespace GalaxItApi.Controllers
         public async Task<ActionResult<User>> GetUser(string id)
         {
             var user = await _context.Users.FindAsync(id);
-
             if (user == null)
             {
                 return NotFound();
             }
-
             return user;
         }
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, User user)
+        public async Task<IActionResult> PutUser(string id, [FromBody] User user)
         {
             if (id != user.Id)
             {
@@ -72,7 +70,7 @@ namespace GalaxItApi.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser([FromBody] User user)
         {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -96,9 +94,6 @@ namespace GalaxItApi.Controllers
             return user;
         }
 
-        private bool UserExists(string id)
-        {
-            return _context.Users.Any(e => e.Id == id);
-        }
+        private bool UserExists(string id) => _context.Users.Any(e => e.Id == id);
     }
 }
