@@ -97,8 +97,14 @@ export class HomeComponent implements OnInit {
     this.sendNewNumberOfUser();
   }
   private sendNewNumberOfUser() {
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'http://localhost:4200/welcome',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
+      'Access-Control-Allow-Headers': '*',
+    });
+    console.log(this.table);
     // tslint:disable-next-line:max-line-length
-    this.httpClient.put<Bubble>('https://galaxit.azurewebsites.net/api/bubbles/NewNumberUser/' + this.bubbles.filter(b => b.id === this.currentBubble)[0].id , this.table)
+    this.httpClient.put<Bubble>('https://localhost:44310/api/bubbles/NewNumberUser/' + this.bubbles.filter(b => b.id === this.currentBubble)[0].id , this.table, {headers})
     .subscribe((result) => {
       console.log(result);
     });

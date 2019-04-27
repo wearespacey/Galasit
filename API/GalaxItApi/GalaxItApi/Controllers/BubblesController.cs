@@ -150,7 +150,7 @@ namespace GalaxItApi.Controllers
             SwaggerResponse(202, "Returns the edited bubble data", typeof(Bubble)),
             SwaggerResponse(404, "If the bubble does not exist")
         ]
-        public async Task<ActionResult<Bubble>> SendNewNumberOfUsers(string id, [FromBody] int number)
+        public async Task<ActionResult<Bubble>> SendNewNumberOfUsers(string id, [FromBody] bool[] place)
         {
             var bubble = await _context.Bubbles
                 .Include(b => b.Tables)
@@ -164,6 +164,7 @@ namespace GalaxItApi.Controllers
                 foreach (var seat in t.Seats)
                 {
                     seat.Occupied = place[j];
+                    j++;
                 }
             }
             _context.Entry(bubble).State = EntityState.Modified;
