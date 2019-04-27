@@ -26,7 +26,10 @@ namespace GalaxItApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<GalaxitContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("GalaxitContext")));
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API v1", Version = "v1"}); });
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new Info { Title = "My API v1", Version = "v1" });
+                c.EnableAnnotations();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
