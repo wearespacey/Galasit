@@ -8,7 +8,7 @@ using GalaxItApi.DTO;
 
 namespace GalaxItApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[Action]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace GalaxItApi.Controllers
             _context = context;
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] Login login)
         {
             User entity = await GetUserByEmail(login.Email);
@@ -31,6 +31,18 @@ namespace GalaxItApi.Controllers
             if (entity.Password.Equals(login.Password)) return Ok();
             return Unauthorized();
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] User user)
+        {
+            User entity = await GetUserByEmail(user.Email);
+            if (entity == null)
+            {
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            return BadRequest("Email is already associated with an account");
         }
 
         private Task<User> GetUserByEmail(string email)

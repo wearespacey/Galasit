@@ -27,7 +27,7 @@ namespace GalaxItApi.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("{id:string}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(string id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -39,7 +39,7 @@ namespace GalaxItApi.Controllers
         }
 
         // PUT: api/Users/5
-        [HttpPut("{id:string}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(string id, [FromBody] User user)
         {
             if (id != user.Id)
@@ -79,7 +79,7 @@ namespace GalaxItApi.Controllers
         }
 
         // DELETE: api/Users/5
-        [HttpDelete("{id:string}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(string id)
         {
             var user = await _context.Users.FindAsync(id);
