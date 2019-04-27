@@ -15,6 +15,8 @@ import { SelectionComponent } from './components/selection/selection.component';
 import { SeatInfoComponent } from './components/seat-info/seat-info.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
