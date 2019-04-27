@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Bubble } from './models/bubble';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  bubbles: Bubble[] = [];
+  currentBubble: string;
+  numberOfUserDetected = 0;
   @ViewChild('video')
   public video;
 
@@ -18,7 +21,9 @@ export class HomeComponent implements OnInit {
     ) {
   }
 
-  public ngOnInit() { }
+  public ngOnInit() {
+    this.getBubbles();
+   }
 
   // tslint:disable-next-line:use-life-cycle-interface
   public ngAfterViewInit() {
@@ -48,11 +53,29 @@ export class HomeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.httpClient.post<any>('https://northeurope.api.cognitive.microsoft.com/customvision/v3.0/Prediction/c51b7c5c-f6f1-4211-9188-349a07efef5e/detect/iterations/Iteration5/image', blob, {headers})
     .subscribe((result) => {
-      console.log(result);
+      this.numberOfUserDetected = result.predictions.filter(e => e.probability > 0.30 && e.tagName === 'person').length;
+      this.sendNewNumberOfUser();
     });
     await this.delay(5000);
     this.capture();
   }
+  private getBubbles() {
+    this.httpClient.get<Bubble[]>('https://galaxit.azurewebsites.net/api/bubbles').subscribe(
+      (result) => {
+        this.bubbles = result;
+        console.log(this.bubbles);
+      }
+    );
+  }
+  private sendNewNumberOfUser() {
+    console.log(this.currentBubble);
+    // tslint:disable-next-line:max-line-length
+    this.httpClient.put<Bubble>('https://galaxit.azurewebsites.net/api/bubbles/NewNumberUser/' + this.bubbles.filter(b => b.id === this.currentBubble)[0].id , this.numberOfUserDetected)
+    .subscribe((result) => {
+      console.log(result);
+    });
+  }
+
   private delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
