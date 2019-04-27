@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BubbleComponentComponent } from './bubble-component.component';
+import { UnbookComponent } from './unbook.component';
 
-describe('BubbleComponentComponent', () => {
-  let component: BubbleComponentComponent;
-  let fixture: ComponentFixture<BubbleComponentComponent>;
+describe('UnbookComponent', () => {
+  let component: UnbookComponent;
+  let fixture: ComponentFixture<UnbookComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BubbleComponentComponent ]
+      declarations: [ UnbookComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BubbleComponentComponent);
+    fixture = TestBed.createComponent(UnbookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -12,17 +12,26 @@ import { BubbleComponentComponent } from './bubble-component/bubble-component.co
 import { SelectionComponentComponent } from './selection-component/selection-component.component';
 import { SeatInfoComponentComponent } from './seat-info-component/seat-info-component.component';
 import { UnbookComponentComponent } from './unbook-component/unbook-component.component';
+import { BackgroundComponent } from './background/background.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { BubbleComponent } from './bubble/bubble.component';
+import { UnbookComponent } from './unbook/unbook.component';
+import { SelectionComponent } from './selection/selection.component';
+import { InfoComponent } from './info/info.component';
+import { SeatInfoComponent } from './seat-info/seat-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BackgroundComponentComponent,
-    LoginComponentComponent,
-    RegisterComponentComponent,
-    BubbleComponentComponent,
-    SelectionComponentComponent,
-    SeatInfoComponentComponent,
-    UnbookComponentComponent
+    BackgroundComponent,
+    LoginComponent,
+    RegisterComponent,
+    BubbleComponent,
+    UnbookComponent,
+    SelectionComponent,
+    InfoComponent,
+    SeatInfoComponent
   ],
   imports: [
     BrowserModule,
