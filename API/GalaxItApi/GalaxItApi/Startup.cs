@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using GalaxItApi.Data;
+using GalaxItApi.Hub;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -26,6 +27,7 @@ namespace GalaxItApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<GalaxitContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("GalaxitContext")));
+            services.AddSignalR();
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info { Title = "My API v1", Version = "v1" });
                 c.EnableAnnotations();
@@ -53,6 +55,7 @@ namespace GalaxItApi
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSignalR(route => { route.MapHub<GalaxitHub>("/GalaxitHub"); });
         }
     }
 }

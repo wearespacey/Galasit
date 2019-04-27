@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
     });
     console.log(this.table);
     // tslint:disable-next-line:max-line-length
-    this.httpClient.put<Bubble>('https://localhost:44310/api/bubbles/NewNumberUser/' + this.bubbles.filter(b => b.id === this.currentBubble)[0].id , this.table, {headers})
+    this.httpClient.put<Bubble>('https://galaxit.azurewebsites.net/api/bubbles/NewNumberUser/' + this.bubbles.filter(b => b.id === this.currentBubble)[0].id , this.table, {headers})
     .subscribe((result) => {
       console.log(result);
     });

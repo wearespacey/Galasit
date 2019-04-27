@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GalaxItApi.Data;
+using GalaxItApi.Hub;
 using GalaxItApi.Models;
+using Microsoft.AspNetCore.SignalR;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace GalaxItApi.Controllers
@@ -17,10 +19,12 @@ namespace GalaxItApi.Controllers
     public class BubblesController : ControllerBase
     {
         private readonly GalaxitContext _context;
+        private readonly IHubContext<GalaxitHub, IActionClient> _hubClients;
 
-        public BubblesController(GalaxitContext context)
+        public BubblesController(GalaxitContext context, IHubContext<GalaxitHub,IActionClient> hubClients)
         {
             _context = context;
+            _hubClients = hubClients;
         }
 
         // GET: api/Bubbles
@@ -169,6 +173,7 @@ namespace GalaxItApi.Controllers
             }
             _context.Entry(bubble).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            await _hubClients.Clients.All.UpdateSeats(place);
             return bubble;
         }
 
