@@ -4,6 +4,7 @@ using GalaxItApi.Data;
 using GalaxItApi.Models;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using GalaxItApi.DTO;
 
 namespace GalaxItApi.Controllers
 {
@@ -18,16 +19,16 @@ namespace GalaxItApi.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Login([FromForm] string email, [FromForm] byte[] password)
+        [HttpPost()]
+        public async Task<IActionResult> Login([FromBody] Login login)
         {
-            User entity = await GetUserByEmail(email);
+            User entity = await GetUserByEmail(login.Email);
             if (entity == null)
             {
                 return NotFound();
             }
 
-            if (entity.Password.Equals(password)) return Ok();
+            if (entity.Password.Equals(login.Password)) return Ok();
             return Unauthorized();
 
         }
