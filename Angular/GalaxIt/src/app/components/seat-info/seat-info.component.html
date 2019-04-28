@@ -12,18 +12,18 @@
   <mat-card-actions>
     <form>
         <mat-form-field>
-            <input matInput [matDatepicker]="Start" placeholder="Start">
+            <input matInput ([ngModel])="start" [matDatepicker]="Start" placeholder="Start" type="date">
             <mat-datepicker-toggle matSuffix [for]="Start"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <br/>
         <mat-form-field>
-            <input matInput [matDatepicker]="End" placeholder="End">
+            <input matInput ([ngModel])="end" [matDatepicker]="End" placeholder="End" type="date">
             <mat-datepicker-toggle matSuffix [for]="End"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <br/>
-        <button mat-raised-button color="primary">Book</button>
+        <button (click)="book()" mat-raised-button color="primary">Book</button>
     </form>
   </mat-card-actions>
 </mat-card>

@@ -1,4 +1,23 @@
 <div class="backgroundImg"></div>
 <mat-grid-list cols="3" rowHeight="1:0.5">
-<mat-grid-tile *ngFor="let item of occupied">{{item}}</mat-grid-tile>
+  <div *ngFor="let item of seats">
+    <div *ngIf="item.occupied; else freeSeats">
+      <mat-grid-tile>
+          <a class="seat occupiedSeat" href="/seat/{{item.id}}">{{ item.number }}</a>
+      </mat-grid-tile>
+    </div>
+
+    <ng-template #freeSeats>
+      <div *ngIf="item.start;else freeNotReserved">
+        <mat-grid-tile>
+            <a class="seat reservedSeat">{{ item.number }}</a>
+        </mat-grid-tile>
+      </div>
+      <ng-template #freeNotReserved>
+          <mat-grid-tile>
+              <a class="seat freeSeat" href="/seat/{{item.id}}">{{ item.number }}</a>
+            </mat-grid-tile>
+      </ng-template>
+    </ng-template>
+  </div>
 </mat-grid-list>

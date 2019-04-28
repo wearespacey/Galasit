@@ -11,7 +11,7 @@ import { PageNotFoundComponent } from '../components/page-not-found/page-not-fou
 
 const routes: Routes = [
   {
-    path: '', component: BackgroundComponent, 
+    path: '', component: BackgroundComponent,
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'unbook', component: UnbookComponent }
     ]
   },
-  { path: 'seat', component: SelectionComponent }, 
+  { path: 'seat', component: SelectionComponent },
   { path: 'seat/:id', component: SeatInfoComponent },
   { path: '**', component: PageNotFoundComponent }
 ]

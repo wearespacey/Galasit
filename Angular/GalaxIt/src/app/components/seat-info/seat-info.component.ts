@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeatInfoComponent implements OnInit {
 
+  start: Date;
+  end: Date;
   constructor() { }
 
   ngOnInit() {
+  }
+  book() {
+    
   }
 
 }
