@@ -7,11 +7,11 @@
   <mat-card-actions>
     <form [formGroup]="loginForm">
       <mat-form-field>
-          <input matInput formControlName="login" type="text" name="login" placeholder="email@hotmail.com" required>
+          <input matInput formControlName="login" type="text" name="login" placeholder="email@hotmail.com">
       </mat-form-field>
       <br/>
       <mat-form-field>
-          <input matInput formControlName="password" type="password" name="password" autocomplete="false" required>
+          <input matInput formControlName="password" type="password" name="password" placeholder="Password" autocomplete="false">
       </mat-form-field>
       <br/>
         <button mat-raised-button color="primary" id="loginSubmitButton" [disabled]="!loginForm.valid" type="submit" (click)="onLoginSubmit()">LOGIN</button>    
