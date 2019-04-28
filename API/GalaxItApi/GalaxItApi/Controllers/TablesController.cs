@@ -35,7 +35,7 @@ namespace GalaxItApi.Controllers
         ]
         public async Task<ActionResult<IEnumerable<Table>>> GetTables()
         {
-            return await _context.Tables.ToListAsync();
+            return await _context.Tables.Include(t=>t.Seats).ToListAsync();
         }
 
         // GET: api/Tables/5
@@ -75,7 +75,7 @@ namespace GalaxItApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(bubble.Tables);
+            return Ok(bubble);
         }
 
         // PUT: api/Tables/5

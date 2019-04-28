@@ -10,8 +10,7 @@ namespace GalaxItApi.Models
         [Key]
         public string Id { get; set; }
 
-        [Required]
-        public Bubble Bubble { get; set; }
+        //public Bubble Bubble { get; set; }
 
         public IEnumerable<Seat> Seats { get; set; } = new List<Seat>();
     }

@@ -37,16 +37,13 @@ namespace GalaxItApi.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("End");
-
-                    b.Property<int>("Number");
+                    b.Property<DateTime?>("End");
 
                     b.Property<bool>("Occupied");
 
-                    b.Property<DateTime>("Start");
+                    b.Property<DateTime?>("Start");
 
-                    b.Property<string>("TableId")
-                        .IsRequired();
+                    b.Property<string>("TableId");
 
                     b.HasKey("Id");
 
@@ -60,8 +57,7 @@ namespace GalaxItApi.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BubbleId")
-                        .IsRequired();
+                    b.Property<string>("BubbleId");
 
                     b.HasKey("Id");
 
@@ -98,18 +94,16 @@ namespace GalaxItApi.Migrations
 
             modelBuilder.Entity("GalaxItApi.Models.Seat", b =>
                 {
-                    b.HasOne("GalaxItApi.Models.Table", "Table")
+                    b.HasOne("GalaxItApi.Models.Table")
                         .WithMany("Seats")
-                        .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TableId");
                 });
 
             modelBuilder.Entity("GalaxItApi.Models.Table", b =>
                 {
                     b.HasOne("GalaxItApi.Models.Bubble", "Bubble")
                         .WithMany("Tables")
-                        .HasForeignKey("BubbleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BubbleId");
                 });
 
             modelBuilder.Entity("GalaxItApi.Models.User", b =>

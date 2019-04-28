@@ -18,8 +18,7 @@ namespace GalaxItApi.Models
 
         public DateTime? End { get; set; }
 
-        [Required]
-        public Table Table { get; set; }
+        //public Table Table { get; set; }
 
         public IEnumerable<User> Users { get; set; } = new List<User>();
     }
