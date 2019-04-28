@@ -58,6 +58,26 @@ namespace GalaxItApi.Controllers
             return Ok(table);
         }
 
+        // GET: api/Tables/FromBubble/5
+        [
+            HttpGet("FromBubble/{id}"),
+            SwaggerOperation(
+                Summary = "Requests a table based on it own location",
+                Description = "Returns the table data"
+            ),
+            SwaggerResponse(200, "Returns the table data", typeof(Table)),
+            SwaggerResponse(404, "If the table does not exist")
+        ]
+        public async Task<ActionResult<Table>> GetTableFromBubble(string id)
+        {
+            var bubble = await _context.Bubbles.Include(b => b.Tables).ThenInclude(t => t.Seats).FirstOrDefaultAsync(b => b.Id == id);
+            if (bubble == null)
+            {
+                return NotFound();
+            }
+            return Ok(bubble.Tables);
+        }
+
         // PUT: api/Tables/5
         [
             HttpPut("{id}"),

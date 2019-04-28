@@ -14,6 +14,7 @@ import { SelectionComponent } from './components/selection/selection.component';
 import { SeatInfoComponent } from './components/seat-info/seat-info.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,7 @@ import { FormsModule } from '@angular/forms';
     MatProgressBarModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
     FormsModule,
@@ -42,7 +43,8 @@ import { FormsModule } from '@angular/forms';
     MatMenuModule,
     MatCardModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

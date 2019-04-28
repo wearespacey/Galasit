@@ -56,3 +56,4 @@ export class GalaxitHubService extends SignalRCoreService<MonitoringMethods> {
     this.stop();
     return true;
   }
+}
