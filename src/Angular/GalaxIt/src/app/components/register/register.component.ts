@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
            res => this.router.navigateByUrl("/bubble"),
            error => {
             this.errorHandler.handleError(error); 
-            this.router.navigateByUrl("/login");
+            this.router.navigateByUrl("/**");
           }
          )
   }
