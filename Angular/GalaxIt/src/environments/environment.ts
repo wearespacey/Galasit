@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_BASE_PATH: 'http://galaxit.azurewebsites.net'
+  API_BASE_PATH: 'https://galaxit.azurewebsites.net'
 };
 
 /*
