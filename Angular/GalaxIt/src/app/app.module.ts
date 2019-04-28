@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule,MatCardModule,MatProgressBarModule,MatDatepickerModule,MatFormFieldModule,MatNativeDateModule,MatInputModule, MatCheckboxModule,MatMenuModule} from '@angular/material';
+import { MatButtonModule, MatCardModule, MatProgressBarModule, MatDatepickerModule,
+         MatFormFieldModule, MatNativeDateModule, MatInputModule, MatCheckboxModule,
+         MatMenuModule, MatGridListModule } from '@angular/material';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
@@ -52,7 +54,8 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatGridListModule
   ],
   providers: [APIS, { provide: BASE_PATH, useValue: environment.API_BASE_PATH }],
   bootstrap: [AppComponent]

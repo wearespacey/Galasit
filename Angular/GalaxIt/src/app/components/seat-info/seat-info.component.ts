@@ -10,6 +10,8 @@ import { Seat } from '../../model/seat';
   styleUrls: ['./seat-info.component.css']
 })
 export class SeatInfoComponent implements OnInit {
+  seat: Seat;
+  
   start: Date;
   end: Date;
   constructor(private userService: UsersService,
