@@ -17,12 +17,13 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'bubble', component: BubbleComponent },
       { path: 'bubble/:id', component: SelectionComponent },
-      { path: 'unbook', component: UnbookComponent }
+      { path: 'unbook', component: UnbookComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'login'}
     ]
   },
   { path: 'seat', component: SelectionComponent }, 
   { path: 'seat/:id', component: SeatInfoComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ]
 
 @NgModule({

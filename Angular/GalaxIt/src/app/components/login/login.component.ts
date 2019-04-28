@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorHandlerService } from 'src/app/services/errorHandler.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { ErrorHandlerService } from 'src/app/services/errorHandler.service';
 })
 export class LoginComponent implements OnInit {
   public loginForm = this.fb.group({
-    login: [ '', Validators.required, Validators.email ],
+    login: [ '', Validators.required],
     password: [ '', Validators.required ]
   });
 
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
               private fb: FormBuilder, 
               private loginService: LoginService, 
               private toastService: ToastrService,
-              private errorService: ErrorHandlerService) { }
+              private errorService: ErrorHandlerService,
+              private authService: AuthService) { }
 
   ngOnInit() { 
   }
@@ -28,7 +30,8 @@ export class LoginComponent implements OnInit {
   onLoginSubmit() {
     this.loginService.login({email: this.loginForm.value.login, password: this.loginForm.value.password}).subscribe(
       res => {
-        sessionStorage.setItem("userId", res);
+        this.authService.userID = res;
+        this.authService.isLoggedIn = true;
         this.router.navigateByUrl("/bubble");
       },
       error => {

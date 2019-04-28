@@ -27,7 +27,7 @@
           <input matInput placeholder="Please confirm password" type="password" formControlName="confirmPassword">
       </mat-form-field>
       <br/>
-      <button mat-raised-button color="primary" [disabled]="!registerForm.valid" type="submit" (click)="onRegisterSubmit()">Register</button>
+      <button mat-raised-button color="primary" [disabled]="!registerForm.valid || !checkPassword()" type="submit" (click)="onRegisterSubmit()">Register</button>
     </form>
   </mat-card-actions>
 </mat-card>
