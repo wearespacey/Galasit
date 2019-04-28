@@ -15,7 +15,7 @@ interface MonitoringMethods extends SignalrMethods {
 export class GalaxitHubService extends SignalRCoreService<MonitoringMethods> {
 
   // tslint:disable-next-line:variable-name
-  private _updateSeats = new EventEmitter<any>();
+  private _updateSeats = new EventEmitter();
   public updateSeats = this.updateSeats.asObservable();
 
   protected url = '/GalaxitHub';
@@ -23,7 +23,7 @@ export class GalaxitHubService extends SignalRCoreService<MonitoringMethods> {
   protected connectionTryDelay = 10000;
 
   protected methods: MonitoringMethods = {
-    UpdateSeats: (table) => this._updateSeats.emit({table}),
+    UpdateSeats: (table) => this._updateSeats.emit(table),
   };
 
   constructor() {
@@ -52,7 +52,8 @@ export class GalaxitHubService extends SignalRCoreService<MonitoringMethods> {
     return this.start();
   }
 
-  public stopService() {
+  public stopService(): boolean {
     this.stop();
     return true;
   }
+}

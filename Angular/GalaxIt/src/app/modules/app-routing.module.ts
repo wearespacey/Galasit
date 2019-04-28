@@ -22,6 +22,7 @@ const routes: Routes = [
   },
   { path: 'seat', component: SelectionComponent }, 
   { path: 'seat/:id', component: SeatInfoComponent },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ]
 
