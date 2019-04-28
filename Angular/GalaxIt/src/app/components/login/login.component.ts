@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorHandlerService } from 'src/app/services/errorHandler.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { UsersService } from 'src/app/services/api';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
               private loginService: LoginService, 
               private toastService: ToastrService,
               private errorService: ErrorHandlerService,
-              private authService: AuthService) { }
+              private authService: AuthService, 
+              private userService: UsersService) { }
 
   ngOnInit() { 
   }
@@ -40,6 +42,11 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("/login");
       }
     )
+  }
+
+  getUser(){
+    this.userService.getUser(this.authService.userID).subscribe(res => {
+      if(res.seat != null) this.router.navigateByUrl("/unbook")})
   }
 
   onRegisterSubmit() {
