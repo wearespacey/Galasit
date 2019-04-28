@@ -6,28 +6,28 @@
     <mat-progress-bar mode="determinate" value="100"></mat-progress-bar>
   </mat-card-content>
   <mat-card-actions>
-    <form>
+    <form [formGroup]="registerForm">
       <mat-form-field>
-          <input matInput placeholder="Enter your email" formControlName="email" required>
+          <input matInput placeholder="Enter your email" formControlName="email">
       </mat-form-field>
       <br/>
       <mat-form-field>
-          <input matInput placeholder="Enter your firstname" formControlName="firstname" required>
+          <input matInput placeholder="Enter your firstname" formControlName="firstname">
       </mat-form-field>
       <br/>
       <mat-form-field>
-        <input matInput placeholder="Enter your surname" formControlName="surname" required>
+        <input matInput placeholder="Enter your surname" formControlName="surname">
       </mat-form-field>
       <br/>
       <mat-form-field>
-          <input matInput placeholder="Enter your password" type="password" formControlName="password" required>
+          <input matInput placeholder="Enter your password" type="password" formControlName="password">
       </mat-form-field>
       <br/>
       <mat-form-field>
-          <input matInput placeholder="Please confirm password" type="password" formControlName="passwordConfirm" required>
+          <input matInput placeholder="Please confirm password" type="password" formControlName="confirmPassword">
       </mat-form-field>
       <br/>
-      <button mat-raised-button color="primary" (click)="onRegisterSubmit()">Register</button>
+      <button mat-raised-button color="primary" [disabled]="!registerForm.valid" type="submit" (click)="onRegisterSubmit()">Register</button>
     </form>
   </mat-card-actions>
 </mat-card>

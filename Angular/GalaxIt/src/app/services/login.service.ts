@@ -117,7 +117,7 @@ export class LoginService {
     public register(user?: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
     public register(user?: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-
+        console.log(user);  
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
