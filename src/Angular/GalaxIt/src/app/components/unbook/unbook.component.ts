@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SeatsService, UsersService } from 'src/app/services/api';
+import { SeatsService, UsersService } from '../../services/api';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { Seat } from 'src/app';
+import { AuthService } from '../../services/auth.service';
+import { Seat } from '../../model/seat';
 
 @Component({
   selector: 'app-unbook',

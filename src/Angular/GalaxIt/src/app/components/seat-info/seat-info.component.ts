@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SeatsService, UsersService } from 'src/app/services/api';
-import { AuthService } from 'src/app/services/auth.service';
-import { ErrorHandlerService } from 'src/app/services/errorHandler.service';
-import { Seat } from 'src/app';
+import { SeatsService, UsersService } from '../../services/api';
+import { AuthService } from '../../services/auth.service';
+import { ErrorHandlerService } from '../../services/errorHandler.service';
+import { Seat } from '../../model/seat';
 
 @Component({
   selector: 'app-seat-info',
