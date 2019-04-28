@@ -10,7 +10,7 @@ import { Bubble } from './models/bubble';
 export class HomeComponent implements OnInit {
   bubbles: Bubble[] = [];
   currentBubble: string;
-  numberOfUserDetected = 0;
+  table = [false, false, false, false, false, false];
   @ViewChild('video')
   public video;
 
@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
           });
           this.capture();
       }
-
   }
 
   public capture() {
@@ -53,8 +52,10 @@ export class HomeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.httpClient.post<any>('https://northeurope.api.cognitive.microsoft.com/customvision/v3.0/Prediction/c51b7c5c-f6f1-4211-9188-349a07efef5e/detect/iterations/Iteration5/image', blob, {headers})
     .subscribe((result) => {
-      this.numberOfUserDetected = result.predictions.filter(e => e.probability > 0.30 && e.tagName === 'person').length;
-      this.sendNewNumberOfUser();
+      this.table = [false, false, false, false, false, false];
+      for(const res of result.predictions.filter(e => e.probability > 0.30 && e.tagName === 'person')) {
+        this.detectPlaceOfUser(res);
+      }
     });
     await this.delay(5000);
     this.capture();
@@ -63,14 +64,47 @@ export class HomeComponent implements OnInit {
     this.httpClient.get<Bubble[]>('https://galaxit.azurewebsites.net/api/bubbles').subscribe(
       (result) => {
         this.bubbles = result;
-        console.log(this.bubbles);
       }
     );
   }
+  private detectPlaceOfUser(data: any) {
+    const centerVert = data.boundingBox.top * 480 + (data.boundingBox.height / 2) * 480;
+    const centerHor = data.boundingBox.left * 640 + (data.boundingBox.width / 2) * 640;
+    console.log(centerHor + ',' + centerVert);
+    if (centerVert < 245) {
+      if (centerHor < 185) {
+        console.log('place 0');
+        this.table[0] = true;
+      } else if ( centerHor < 340) {
+        console.log('place 1');
+        this.table[1] = true;
+      } else {
+        console.log('place 2');
+        this.table[2] = true;
+      }
+    } else {
+      if (centerHor < 185) {
+        console.log('place 3');
+        this.table[3] = true;
+      } else if ( centerHor < 340) {
+        console.log('place 4');
+        this.table[4] = true;
+      } else {
+        console.log('place 5');
+        this.table[5] = true;
+      }
+    }
+    this.sendNewNumberOfUser();
+  }
   private sendNewNumberOfUser() {
-    console.log(this.currentBubble);
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'http://localhost:4200/welcome',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
+      'Access-Control-Allow-Headers': '*',
+    });
+    console.log(this.table);
     // tslint:disable-next-line:max-line-length
-    this.httpClient.put<Bubble>('https://galaxit.azurewebsites.net/api/bubbles/NewNumberUser/' + this.bubbles.filter(b => b.id === this.currentBubble)[0].id , this.numberOfUserDetected)
+    this.httpClient.put<Bubble>('https://galaxit.azurewebsites.net/api/bubbles/NewNumberUser/' + this.bubbles.filter(b => b.id === this.currentBubble)[0].id , this.table, {headers})
     .subscribe((result) => {
       console.log(result);
     });

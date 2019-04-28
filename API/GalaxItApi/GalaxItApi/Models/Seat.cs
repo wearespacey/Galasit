@@ -14,15 +14,12 @@ namespace GalaxItApi.Models
         [Required]
         public bool Occupied { get; set; }
 
-        public DateTime Start { get; set; }
+        public DateTime? Start { get; set; }
 
-        public DateTime End { get; set; }
+        public DateTime? End { get; set; }
 
         [Required]
         public Table Table { get; set; }
-
-        [Required]//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Number { get; set; }
 
         public IEnumerable<User> Users { get; set; } = new List<User>();
     }

@@ -9,16 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Table } from './table';
-import { User } from './user';
 
 
-export interface Seat { 
-    id?: string;
-    occupied: boolean;
-    start?: Date;
-    end?: Date;
-    table: Table;
-    number: number;
-    users?: Array<User>;
+export interface ProblemDetails { 
+  [key: string]: any | any;
+
+
+    type?: string;
+    title?: string;
+    status?: number;
+    detail?: string;
+    instance?: string;
 }

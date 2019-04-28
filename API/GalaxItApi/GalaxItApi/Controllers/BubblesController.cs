@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GalaxItApi.Data;
+using GalaxItApi.Hub;
 using GalaxItApi.Models;
+using Microsoft.AspNetCore.SignalR;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace GalaxItApi.Controllers
@@ -17,10 +19,12 @@ namespace GalaxItApi.Controllers
     public class BubblesController : ControllerBase
     {
         private readonly GalaxitContext _context;
+        private readonly IHubContext<GalaxitHub, IActionClient> _hubClients;
 
-        public BubblesController(GalaxitContext context)
+        public BubblesController(GalaxitContext context, IHubContext<GalaxitHub,IActionClient> hubClients)
         {
             _context = context;
+            _hubClients = hubClients;
         }
 
         // GET: api/Bubbles
@@ -150,7 +154,7 @@ namespace GalaxItApi.Controllers
             SwaggerResponse(202, "Returns the edited bubble data", typeof(Bubble)),
             SwaggerResponse(404, "If the bubble does not exist")
         ]
-        public async Task<ActionResult<Bubble>> SendNewNumberOfUsers(string id, [FromBody] int number)
+        public async Task<ActionResult<Bubble>> SendNewNumberOfUsers(string id, [FromBody] bool[] place)
         {
             var bubble = await _context.Bubbles
                 .Include(b => b.Tables)
@@ -160,24 +164,16 @@ namespace GalaxItApi.Controllers
             if (bubble == null) return NotFound();
             foreach (var t in bubble.Tables)
             {
-                foreach (var s in t.Seats)
+                var j = 0;
+                foreach (var seat in t.Seats)
                 {
-                    if (number > 0)
-                    {
-                        if (s.Occupied == false)
-                        {
-                            s.Occupied = true;
-                        }
-                        number--;
-                    }
-                    else
-                    {
-                        s.Occupied = false;
-                    }
+                    seat.Occupied = place[j];
+                    j++;
                 }
             }
             _context.Entry(bubble).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            await _hubClients.Clients.All.UpdateSeats(place);
             return bubble;
         }
 

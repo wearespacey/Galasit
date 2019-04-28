@@ -16,9 +16,10 @@ import { HttpClient, HttpHeaders, HttpParams,
          HttpResponse, HttpEvent }                           from '@angular/common/http';
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import { Observable }                                        from 'rxjs';
+import { Observable }                                        from 'rxjs/Observable';
 
 import { Login } from '../model/login';
+import { ProblemDetails } from '../model/problemDetails';
 import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -58,15 +59,15 @@ export class LoginService {
 
 
     /**
-     * 
-     * 
+     * Requests a user&#39;s token
+     * Returns the user&#39;s id
      * @param login 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public login(login?: Login, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public login(login?: Login, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public login(login?: Login, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public login(login?: Login, observe?: 'body', reportProgress?: boolean): Observable<string>;
+    public login(login?: Login, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+    public login(login?: Login, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
     public login(login?: Login, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
@@ -74,6 +75,7 @@ export class LoginService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -92,7 +94,7 @@ export class LoginService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<any>(`${this.basePath}/api/Login/Login`,
+        return this.httpClient.post<string>(`${this.basePath}/api/Login/Login`,
             login,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -104,15 +106,15 @@ export class LoginService {
     }
 
     /**
-     * 
-     * 
+     * Register into an account
+     * Returns the user&#39;s id
      * @param user 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public register(user?: User, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public register(user?: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public register(user?: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public register(user?: User, observe?: 'body', reportProgress?: boolean): Observable<string>;
+    public register(user?: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+    public register(user?: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
     public register(user?: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
@@ -120,6 +122,7 @@ export class LoginService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -138,7 +141,7 @@ export class LoginService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<any>(`${this.basePath}/api/Login/Register`,
+        return this.httpClient.post<string>(`${this.basePath}/api/Login/Register`,
             user,
             {
                 withCredentials: this.configuration.withCredentials,
