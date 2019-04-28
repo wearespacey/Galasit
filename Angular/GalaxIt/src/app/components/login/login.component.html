@@ -4,14 +4,17 @@
   <mat-card-header>
     <mat-card-title>Login</mat-card-title>
   </mat-card-header>
+  <mat-card-content>
+      <mat-progress-bar mode="determinate" value="100"></mat-progress-bar>
+  </mat-card-content>
   <mat-card-actions>
     <form [formGroup]="loginForm">
       <mat-form-field>
-          <input matInput formControlName="login" type="text" name="login" placeholder="Email">
+          <input matInput formControlName="login" type="text" name="login" placeholder="email@hotmail.com">
       </mat-form-field>
       <br/>
       <mat-form-field>
-          <input matInput formControlName="password" type="password" name="password" placeholder="*******" autocomplete="false">
+          <input matInput formControlName="password" type="password" name="password" placeholder="Password" autocomplete="false">
       </mat-form-field>
       <br/>
         <button mat-raised-button color="primary" id="loginSubmitButton" [disabled]="!loginForm.valid" type="submit" (click)="onLoginSubmit()">LOGIN</button>    

@@ -16,7 +16,7 @@ import { HttpClient, HttpHeaders, HttpParams,
          HttpResponse, HttpEvent }                           from '@angular/common/http';
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import { Observable }                                        from 'rxjs/Observable';
+import { Observable }                                        from 'rxjs';
 
 import { Login } from '../model/login';
 import { ProblemDetails } from '../model/problemDetails';
@@ -117,7 +117,7 @@ export class LoginService {
     public register(user?: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
     public register(user?: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-
+        console.log(user);  
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
