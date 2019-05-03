@@ -47,7 +47,7 @@ git clone https://github.com/wearespacey/galasit
 * [@lloreln](https://github.com/Lloreln)
 
 ## Open to Suggestion
-Have a suggestion for the app? Found a bug ? Wanna join the team? Please take a look at the [contributing](https://github.com/wearespacey/Galasit/blob/develop/CONTRIBUTING) guidelines if so!
+Have a suggestion for the app? Found a bug ? Wanna join the team? Please take a look at the [contributing](https://github.com/wearespacey/Galasit/blob/develop/CONTRIBUTING.md) guidelines if so!
 
 ## License
 This project is under [MIT license](https://github.com/wearespacey/Galasit/blob/develop/LICENSE).
